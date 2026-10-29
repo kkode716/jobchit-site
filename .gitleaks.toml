@@ -1,0 +1,7 @@
+# gitleaks default rules, skipping generated and installed folders (they are never committed).
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Generated or installed, never committed"
+paths = ['''(^|/)node_modules/''', '''(^|/)_site(-sub)?/''', '''(^|/)\.lighthouseci/''', '''(^|/)\.features-gen/''', '''(^|/)test-results/''', '''(^|/)playwright-report/''']

@@ -1,0 +1,51 @@
+---
+layout: base.njk
+title: Jobchit pricing
+description: One plan at $24 a month or $240 a year, with estimates, change orders, signing, the job record and export included.
+heading: One plan, with everything in it
+sub: There’s one price for the whole account. Change orders aren’t held back for a bigger plan.
+---
+<div class="plan-wrap">
+  <article class="jc-card plan" aria-labelledby="plan">
+    <header class="jc-card__band"><h2 id="plan" class="jc-card__no">Jobchit</h2><span class="jc-stamp jc-stamp--draft">14 days free, no card, when it opens</span></header>
+    <div class="plan__toggle" role="group" aria-label="Billing" data-billing hidden>
+      <button type="button" class="jc-btn" aria-pressed="true" data-period="month">Monthly</button>
+      <button type="button" class="jc-btn" aria-pressed="false" data-period="year">Yearly</button>
+    </div>
+    <div class="plan__price" aria-live="polite">
+      <p class="price"><span data-price>$24</span><span class="price__unit" data-unit> a month</span></p>
+      <p class="plan__note" data-note>Or $240 a year, which is two months free.</p>
+    </div>
+    <ul class="plan__list">
+      <li><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Estimates with your price list, tax, deposit and logo</span></li>
+      <li><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>“Describe the job” drafts, up to a monthly limit</span></li>
+      <li><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Change orders with photos, signed on your phone or by link</span></li>
+      <li><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>A job record with the running total and every signed PDF</span></li>
+      <li><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span>Export everything to CSV, any time</span></li>
+    </ul>
+    <div class="plan__cta">
+      <a class="jc-btn jc-btn--primary jc-btn--block jc-btn--big" href="/#waitlist">Join the waitlist</a>
+    </div>
+  </article>
+</div>
+
+<section class="wrap sec sec--narrow" aria-labelledby="faq">
+  <h2 id="faq" class="h2">Questions</h2>
+  <dl class="faq">
+    <div><dt>What happens when the trial ends?</dt><dd>If you don’t subscribe, your account turns read-only. You can still open every job and download every PDF and CSV. Nothing is deleted.</dd></div>
+    <div><dt>Is there a contract?</dt><dd>No. Cancel from the billing page whenever you want. A yearly plan runs to the end of its year.</dd></div>
+    <div><dt>Does my customer need an account?</dt><dd>No. They sign on your phone, or open the link you send them and sign there.</dd></div>
+    <div><dt>Can I call it a work authorization instead?</dt><dd>Yes. Pick “change order” or “work authorization” in your settings and every document uses that name.</dd></div>
+  </dl>
+</section>
+
+<section class="final" aria-labelledby="h-final">
+  <div class="wrap">
+    <h2 id="h-final" class="h2">Be the first to try it on a job.</h2>
+    <p class="lead">Jobchit is still being built. The templates are free today.</p>
+    <div class="ctas">
+      <a class="jc-btn jc-btn--primary" href="/#waitlist">Join the waitlist</a>
+      <a class="jc-btn" href="/templates/">Get a free template</a>
+    </div>
+  </div>
+</section>

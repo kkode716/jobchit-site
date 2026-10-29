@@ -1,0 +1,30 @@
+{#- Static picture of the job record on a phone (mockup board JobRecord), shown instead of the laptop below 760px. -#}
+<figure class="phone shot--phone" role="img" aria-label="Jobchit on a phone: job 0142, the Ruiz kitchen. Change 01 is signed, change 02 is waiting for a signature, change 03 is a draft. Total now $17,625.00, or $18,865.00 once change 02 is signed.">
+  <div class="phone__top"><span class="jc-btn jc-btn--quiet"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>Jobs</span></div>
+  <div class="phone__body">
+    <div class="jc-card">
+      <div class="jc-card__band"><span class="jc-card__no">Job No. 0142</span><span class="jc-card__meta">Ruiz kitchen · 1207 Larch St</span></div>
+      <div class="jc-stages">
+        <span class="jc-stage jc-stage--done">Estimate</span><span class="jc-stage jc-stage--done">Signed</span><span class="jc-stage jc-stage--now">Changes</span><span class="jc-stage">Final</span><span class="jc-stage">Closed</span>
+      </div>
+      <div class="jc-cells">
+        <div class="jc-cell"><span class="jc-cell__label">Customer</span><span class="jc-cell__value">Dana Ruiz</span></div>
+        <div class="jc-cell"><span class="jc-cell__label">Estimate signed</span><span class="jc-cell__value">Oct 3, 2026</span></div>
+      </div>
+    </div>
+    <span class="jc-label">Change orders</span>
+    <div class="jc-card">{% include "change-rows.njk" %}</div>
+    <div class="jc-card">
+      <div class="jc-total">
+        <span class="jc-total__dt">Estimate</span><span class="jc-total__dd">$17,440.00</span>
+        <span class="jc-total__dt">Signed changes</span><span class="jc-total__dd">+$185.00</span>
+        <span class="jc-total__dt jc-total__sum">Total now</span><span class="jc-total__dd jc-total__sum">$17,625.00</span>
+        <span class="jc-total__dt jc-total__wide">$18,865.00 once change 02 is signed</span>
+      </div>
+    </div>
+  </div>
+  <div class="jc-bar">
+    <span class="jc-btn"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDFs</span>
+    <span class="jc-btn jc-btn--primary"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New change</span>
+  </div>
+</figure>

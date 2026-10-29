@@ -1,0 +1,30 @@
+{
+  "name": "jobchit-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Jobchit marketing site: landing page, pricing, free templates and state requirement pages.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "npm run build:site && npm run pdf",
+    "build:site": "eleventy",
+    "build:sub": "PATH_PREFIX=/jobchit-site/ OUT_DIR=_site-sub npm run build:site && PATH_PREFIX=/jobchit-site/ node scripts/pdf.mjs _site-sub",
+    "pdf": "node scripts/pdf.mjs _site",
+    "serve": "node scripts/serve.mjs _site 8080 /",
+    "test": "npm run build && npm run build:sub && npm run test:unit && npm run test:e2e",
+    "test:unit": "node --test test/unit/*.test.mjs",
+    "test:e2e": "bddgen && playwright test",
+    "lhci": "lhci autorun --config=lighthouserc.mobile.cjs && lhci autorun --config=lighthouserc.desktop.cjs"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.7",
+    "@axe-core/playwright": "4.14.0",
+    "@fontsource/public-sans": "5.3.0",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.64.1",
+    "playwright-bdd": "9.2.1"
+  }
+}

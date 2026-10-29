@@ -1,0 +1,36 @@
+# Runs on GitHub-hosted runners for every push and pull request. Nothing here deploys.
+name: CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: gitleaks (full history)
+        run: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f git /repo --config /repo/.gitleaks.toml --redact --no-banner
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Build (root and /jobchit-site/)
+        run: |
+          npm run build:site
+          PATH_PREFIX=/jobchit-site/ OUT_DIR=_site-sub npm run build:site
+      - name: Template PDFs
+        run: |
+          npm run pdf
+          PATH_PREFIX=/jobchit-site/ node scripts/pdf.mjs _site-sub
+      - name: Unit tests
+        run: npm run test:unit
+      - name: BDD and axe
+        run: npm run test:e2e
+      - name: Lighthouse CI
+        run: npm run lhci

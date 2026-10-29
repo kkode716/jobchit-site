@@ -1,0 +1,19 @@
+---
+layout: base.njk
+title: Free change-order and estimate templates | Jobchit
+description: Printable change-order templates for remodelers and handymen, and an estimate template. Print them or download the PDF. No account, no email.
+heading: Free change-order and estimate templates
+sub: Print them or download the PDF. No account, no email.
+---
+<section class="wrap sec sec--tight" aria-label="Templates">
+  <ul class="tpl-list">
+    {%- for t in templates %}
+    <li class="jc-card tpl-card">
+      <h2 class="tpl-card__title"><a href="/templates/{{ t.slug }}/">{{ t.name }}</a></h2>
+      <p>{{ t.summary }}</p>
+      <span class="tpl-card__meta">US Letter, 1 page · PDF</span>
+    </li>
+    {%- endfor %}
+  </ul>
+  <p class="tpl-note">Jobchit, when it opens, fills these in on your phone and gets them signed on the spot. <a href="/#waitlist">Join the waitlist</a>.</p>
+</section>

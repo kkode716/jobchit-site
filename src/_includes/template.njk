@@ -1,0 +1,22 @@
+---
+layout: base.njk
+bodyClass: tpl
+---
+<div class="wrap sec sec--tight tpl-page">
+  <div class="tpl-actions">
+    <button type="button" class="jc-btn jc-btn--primary" data-print hidden><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M7 14h10v6H7z"/></svg>Print</button>
+    <a class="jc-btn" href="/templates/{{ slug }}.pdf"><svg class="jc-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Download PDF</a>
+  </div>
+  <div class="sheet">
+{{ content | safe }}
+  </div>
+  <div class="tpl-after">
+    <h2 class="h2 h2--sm">How to use it</h2>
+    <ul class="tpl-tips">
+      {%- for tip in tips %}
+      <li>{{ tip }}</li>
+      {%- endfor %}
+    </ul>
+    <p class="tpl-note">Jobchit, when it opens, does this on your phone: you write the change, the customer signs with a finger, and you both get a dated PDF. <a href="/#waitlist">Join the waitlist</a>.</p>
+  </div>
+</div>

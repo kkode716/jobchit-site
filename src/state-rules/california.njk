@@ -1,0 +1,38 @@
+---
+layout: base.njk
+draft: false
+state: California
+permalink: /state-rules/california/
+title: California change order rules, quoted from the code | Jobchit
+description: What California's Business and Professions Code sections 7159 and 7159.10 say about putting contract changes in writing and signing them before the work starts, quoted word for word.
+heading: "California: changes in writing, signed before the work"
+sub: What the Business and Professions Code says about written, signed change orders for home improvement and service and repair work.
+---
+<div class="wrap sec sec--tight rule">
+  <article class="rule__body" aria-labelledby="h-plain">
+    <p class="rule__verified">Verified on <time datetime="{{ california.verified }}">{{ california.verifiedText }}</time> against the official text on leginfo.legislature.ca.gov.</p>
+
+    <h2 id="h-plain" class="h2 h2--sm">In plain words</h2>
+    <ul class="rule__summary">
+      <li>Section 7159 covers home improvement contracts where the total price is over $500. It says the contract and any changes to it are to be in writing and signed by both sides before the work they cover starts.</li>
+      <li>It says a change order becomes part of the contract only if it is in writing and signed before the work it covers starts, and that a change order describes the scope of the change, the cost added or taken off, and the effect on the payment schedule.</li>
+      <li>Section 7159.10 covers small service and repair contracts of $750 or less that meet its conditions. It says changes to those contracts are also to be in writing and signed or acknowledged.</li>
+      <li>Both sections have more requirements than the parts quoted here. Read the full text at the links below.</li>
+    </ul>
+
+    {%- for section in california.sections %}
+    <section class="rule__section" aria-labelledby="h-{{ section.number | replace('.', '-') }}">
+      <h2 id="h-{{ section.number | replace('.', '-') }}" class="h2 h2--sm">Section {{ section.number }}: {{ section.title }}</h2>
+      {%- for quote in section.quotes %}
+      <figure class="rule__quote">
+        <blockquote cite="{{ section.url }}"><p>{{ quote.text }}</p></blockquote>
+        <figcaption>California Business and Professions Code, Section {{ quote.cite }}</figcaption>
+      </figure>
+      {%- endfor %}
+      <p class="rule__source">Source: <a href="{{ section.url }}">Section {{ section.number }} on leginfo.legislature.ca.gov</a>. {{ section.history }}</p>
+    </section>
+    {%- endfor %}
+
+    <p class="rule-footer">General information, not legal advice. Check with your state licensing board or a lawyer.</p>
+  </article>
+</div>

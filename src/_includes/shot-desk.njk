@@ -1,0 +1,45 @@
+{#- Static picture of the app on a laptop (mockup board Desk). Nothing in it is a control; the figure reads as one image. -#}
+<figure class="frame shot--desk" role="img" aria-label="Jobchit on a laptop: job 0142, the Ruiz kitchen, with change 01 signed for $185.00, change 02 waiting for a signature and change 03 in draft. Total now $17,625.00.">
+  <div class="frame__bar"><i></i><i></i><i></i><span class="frame__url">app.jobchit.com/jobs/0142</span></div>
+  <div class="desk">
+    <div class="desk__side">
+      <span class="desk__brand">{% set size = 24 %}{% include "logo.njk" %}Jobchit</span>
+      <span class="desk__nav desk__nav--now"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Jobs</span>
+      <span class="desk__nav"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M5 4h14v16H5zM9 9h6M9 13h6M9 17h3"/></svg>Price list</span>
+      <span class="desk__nav"><svg class="jc-icon" viewBox="0 0 24 24"><circle cx="12" cy="9" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/></svg>Customers</span>
+      <span class="desk__nav"><svg class="jc-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/></svg>Settings</span>
+      <span class="desk__plan">Plan: $24 a month<br>Renews Nov 3</span>
+    </div>
+    <div class="desk__list">
+      <div class="desk__search"><span class="desk__input">Job or customer</span><span class="jc-btn jc-btn--primary desk__new"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></div>
+      <span class="jc-label desk__group">Waiting for a signature</span>
+      <span class="desk__job desk__job--now"><span class="desk__jobname">No.&nbsp;0142&nbsp;· Ruiz kitchen</span><span class="desk__amt">$17,625.00</span><span class="desk__badge"><span class="jc-stamp jc-stamp--waiting"><svg class="jc-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>Change 02 · sent 2 hours ago</span></span></span>
+      <span class="jc-label desk__group">Active</span>
+      <span class="desk__job"><span class="desk__jobname">No.&nbsp;0143&nbsp;· Morgan hall bath</span><span class="desk__addr">88 Birch Ave</span><span class="desk__amt">$1,551.91</span><span class="desk__badge"><span class="jc-stamp jc-stamp--draft">Estimate draft</span></span></span>
+      <span class="desk__job"><span class="desk__jobname">No.&nbsp;0139&nbsp;· Chen deck</span><span class="desk__addr">41 Orchard Ln</span><span class="desk__amt">$9,320.00</span><span class="desk__badge"><span class="jc-stamp jc-stamp--signed"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>All signed</span></span></span>
+      <span class="desk__job"><span class="desk__jobname">No.&nbsp;0137&nbsp;· Montgomery-Harrison basement bath</span><span class="desk__addr">9 Ridge Ct</span><span class="desk__amt">$24,180.00</span><span class="desk__badge"><span class="jc-stamp jc-stamp--declined"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></svg>Change declined</span></span></span>
+    </div>
+    <div class="desk__pane">
+      <div class="desk__head">
+        <div class="desk__title"><span class="desk__h">Job No. 0142</span><span class="desk__meta">Ruiz kitchen · 1207 Larch St</span></div>
+        <span class="jc-btn desk__btn"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDFs</span>
+        <span class="jc-btn jc-btn--primary desk__btn"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>New change</span>
+      </div>
+      <div class="jc-stages jc-stages--bare">
+        <span class="jc-stage jc-stage--done">Estimate</span><span class="jc-stage jc-stage--done">Signed</span><span class="jc-stage jc-stage--now">Changes</span><span class="jc-stage">Final</span><span class="jc-stage">Closed</span>
+      </div>
+      <div class="jc-card">
+        <div class="desk__totals">
+          <div><span class="jc-label">Estimate</span><span class="desk__fig">$17,440.00</span></div>
+          <div><span class="jc-label">Signed changes</span><span class="desk__fig">+$185.00</span></div>
+          <div class="desk__totals--now"><span class="jc-label">Total now</span><span class="desk__fig">$17,625.00</span></div>
+        </div>
+        <span class="desk__note">$18,865.00 once change 02 is signed</span>
+      </div>
+      <div class="jc-card">
+        <span class="desk__cardhead">Change orders</span>
+        {% include "change-rows.njk" %}
+      </div>
+    </div>
+  </div>
+</figure>

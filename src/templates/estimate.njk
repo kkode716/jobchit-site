@@ -1,0 +1,62 @@
+---
+layout: template.njk
+slug: estimate
+title: Estimate template (free PDF) | Jobchit
+description: A free, printable estimate form. Line items, subtotal, tax and total, with a line for the customer to sign. No account needed.
+heading: Estimate
+sub: Line items, subtotal, tax and total on one page, with a line for the customer to sign when they say yes.
+tips:
+  - Give each line a clear description and an amount, so every total traces back to its lines.
+  - Write the tax rate you used and what it applies to.
+  - Put a date the price is good until.
+  - When the customer agrees, have them sign and date it, and keep a copy each.
+---
+<header class="sheet__head">
+  <h2 class="sheet__title">Estimate</h2>
+  <div class="sheet__no"><span class="f__label">Estimate no.</span><span class="f__line f__line--short"></span></div>
+</header>
+<div class="sheet__sec">
+  <div class="fields fields--3">
+    <div class="f"><span class="f__label">Business name</span><span class="f__line"></span></div>
+    <div class="f"><span class="f__label">License no.</span><span class="f__line"></span></div>
+    <div class="f"><span class="f__label">Phone and email</span><span class="f__line"></span></div>
+    <div class="f"><span class="f__label">Customer</span><span class="f__line"></span></div>
+    <div class="f"><span class="f__label">Job address</span><span class="f__line"></span></div>
+    <div class="f"><span class="f__label">Date</span><span class="f__line"></span></div>
+  </div>
+</div>
+<div class="sheet__sec">
+  <table class="items">
+    <caption class="jc-sr">Line items</caption>
+    <thead><tr><th scope="col">Description</th><th scope="col" class="items__n">Qty</th><th scope="col" class="items__n">Unit price</th><th scope="col" class="items__n">Amount</th></tr></thead>
+    <tbody>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+      <tr><td></td><td></td><td></td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="sums">
+    <div class="sums__row"><span class="f__label">Subtotal</span><span class="f__line f__line--money"></span></div>
+    <div class="sums__row"><span class="f__label">Tax (____%)</span><span class="f__line f__line--money"></span></div>
+    <div class="sums__row sums__row--total"><span class="f__label">Total</span><span class="f__line f__line--money"></span></div>
+  </div>
+</div>
+<div class="sheet__sec">
+  <div class="fields">
+    <div class="f"><span class="f__label">Price good until</span><span class="f__line"></span></div>
+    <div class="f"><span class="f__label">Deposit, if any</span><span class="f__line f__line--money"></span></div>
+  </div>
+</div>
+<p class="sheet__notice">Customer approval: I accept this estimate.</p>
+<div class="sigs">
+  <div class="sig"><span class="f__line f__line--sig"></span><span class="f__label">Customer signature</span></div>
+  <div class="sig sig--date"><span class="f__line f__line--sig"></span><span class="f__label">Date</span></div>
+</div>
+<p class="sheet__foot">Free template from jobchit.com. General information, not legal advice.</p>

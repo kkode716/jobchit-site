@@ -1,0 +1,70 @@
+{%- set liveRules = collections.stateRules | live -%}
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+{%- if draft or noindex %}
+<meta name="robots" content="noindex">
+{%- endif %}
+{%- if not noindex %}
+<link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
+{%- endif %}
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/app-icon.svg">
+<link rel="preload" href="/assets/fonts/public-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/public-sans-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<script type="module" src="/assets/js/site.js"></script>
+</head>
+<body class="jc{% if bodyClass %} {{ bodyClass }}{% endif %}">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap nav">
+    <a class="logo" href="/">{% include "logo.njk" %}Jobchit</a>
+    <nav class="nav__links" aria-label="Main">
+      <a href="/#how">How it works</a>
+      <a href="/pricing/"{% if page.url == "/pricing/" %} aria-current="page"{% endif %}>Pricing</a>
+      <a href="/templates/"{% if page.url.startsWith("/templates/") %} aria-current="page"{% endif %}>Templates</a>
+      {%- if liveRules.length %}
+      <a href="{{ liveRules[0].url }}"{% if page.url.startsWith("/state-rules/") %} aria-current="page"{% endif %}>State rules</a>
+      {%- endif %}
+    </nav>
+    <div class="nav__right">
+      <a class="nav__small" href="/templates/">Templates</a>
+      <a class="jc-btn jc-btn--primary" href="/#waitlist">Join the waitlist</a>
+    </div>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+{%- if hero %}
+{% include hero %}
+{%- else %}
+<section class="band" aria-labelledby="h1">
+  <div class="wrap hero hero--page">
+    <h1 id="h1" class="h1">{{ heading }}</h1>
+    {%- if sub %}
+    <p class="sub">{{ sub }}</p>
+    {%- endif %}
+  </div>
+</section>
+{%- endif %}
+{{ content | safe }}
+</main>
+<footer class="wrap foot">
+  <a class="logo logo--sm" href="/">{% set size = 22 %}{% include "logo.njk" %}Jobchit</a>
+  <a href="/pricing/">Pricing</a>
+  <a href="/templates/">Templates</a>
+  {%- for rule in liveRules %}
+  <a href="{{ rule.url }}">{{ rule.data.state }} rules</a>
+  {%- endfor %}
+  <a href="/privacy/">Privacy</a>
+  <small>General information on this site is not legal advice.</small>
+</footer>
+</body>
+</html>

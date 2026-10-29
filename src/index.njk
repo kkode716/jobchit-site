@@ -1,0 +1,91 @@
+---
+layout: base.njk
+title: Jobchit, estimates and signed change orders
+description: Estimates and signed change orders for small remodelers and handymen, on your phone. Join the waitlist or print a free template.
+hero: hero-home.njk
+bodyClass: lp-home
+---
+{%- set liveRules = collections.stateRules | live -%}
+<div class="shotband">
+  <div class="wrap shot" data-reveal="shot">
+    {% include "shot-desk.njk" %}
+    {% include "shot-phone.njk" %}
+  </div>
+</div>
+
+<section id="how" class="wrap sec" aria-labelledby="h-why">
+  <h2 id="h-why" class="h2" data-reveal="up">Everything between the estimate and the final bill</h2>
+  <p class="lead" data-reveal="up">For remodelers and handymen with 1 to 9 people, who write estimates in the truck and get asked for extras halfway through the job.</p>
+  <ul class="grid" data-reveal="stagger">
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h11M4 18h7"/></svg><h3>One-sentence estimates</h3><p>Describe the job the way you’d say it. We draft line items from your saved prices, and you check every one.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1L19 8l-3-3L5 16z"/><path d="M14 7l3 3"/></svg><h3>Change orders on the spot</h3><p>What changes, the price up or down, any extra days and up to three photos, written in the kitchen.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg><h3>Signed on your phone</h3><p>Hand them the phone, or text a link from your own messages. They sign with a finger. No app for them.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 5H7l5 7-5 7h10"/></svg><h3>A running total</h3><p>Each change joins the job total the moment it’s signed, so you always know what the job is worth.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/></svg><h3>A record you both keep</h3><p>Each signed PDF shows the typed name, the time, the device and a fingerprint of the exact document.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18L18 6"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg><h3>Tax, deposit and your logo</h3><p>Set them once. They show up on every estimate, change order and PDF.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><h3>Export whenever you like</h3><p>Download any signed PDF, or every job as a CSV. Your records stay yours.</p></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 7.5-2"/></svg><h3>Never locked out</h3><p>If you stop paying, your account turns read-only and you can still download everything.</p></li>
+  </ul>
+</section>
+
+<section class="wrap sec split" aria-labelledby="h-rec">
+  <div data-reveal="up">
+    <h2 id="h-rec" class="h2">The record shows what was agreed, and when.</h2>
+    <p class="lead">Every total traces back to its lines. Every signature carries the signer’s typed name, the time, the device, the IP address and a SHA-256 fingerprint of the exact document they saw.</p>
+    <p class="lead">Download any signed PDF, or export every job to CSV whenever you like.</p>
+  </div>
+  <figure class="jc-card demo" data-reveal="sign" role="img" aria-label="A signed change order: move outlet 18 inches left and add a GFCI, plus $185.00, signed by Dana Ruiz on October 9, 2026 at 4:12 PM, with the device and a SHA-256 fingerprint of the document.">
+    <div class="jc-row jc-row--last"><span class="jc-row__no">01</span><span class="jc-row__title">Move outlet 18&nbsp;in. left, add GFCI</span><span class="jc-row__amt">+$185.00</span><span class="jc-row__note">Wall behind the range. Photo attached.</span>
+      <div class="jc-row__sig jc-sig">
+        <span class="jc-sig__pad"><svg viewBox="0 0 300 110" preserveAspectRatio="none"><path class="jc-sig__stroke" d="M40 70c10-30 22-38 26-20s-4 30 6 22 14-34 22-30-6 32 6 30 18-26 26-22 2 22 14 18 30-14 48-16"/></svg></span>
+        <span class="jc-sig__record"><span>Signed by</span><span>Dana Ruiz</span><span>Time</span><span>Oct 9, 2026, 4:12&nbsp;PM CDT</span><span>Device</span><span>iPhone, Safari, IP 203.0.113.24</span><span>Document</span><span>SHA-256 9f3c 1a7e 52b0 … e41d</span></span>
+        <span class="jc-stamp jc-stamp--signed"><svg class="jc-icon" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Signed Oct 9</span>
+      </div>
+    </div>
+  </figure>
+</section>
+
+<section class="wrap sec split" aria-labelledby="h-est">
+  <div data-reveal="up">
+    <h2 id="h-est" class="h2">Estimates start with one sentence.</h2>
+    <p class="lead">Describe the job the way you’d say it out loud. We turn it into line items from your saved prices. You change anything that’s off, then send it. Nothing goes to a customer until you’ve checked it.</p>
+    <p class="lead">Tax, deposit and your logo are on the PDF.</p>
+  </div>
+  <div class="jc-card demo" data-reveal="total">
+    <p class="say"><span class="lp-w">“Tear</span> <span class="lp-w">out</span> <span class="lp-w">the</span> <span class="lp-w">old</span> <span class="lp-w">vanity,</span> <span class="lp-w">put</span> <span class="lp-w">in</span> <span class="lp-w">a</span> <span class="lp-w">36&nbsp;in.</span> <span class="lp-w">vanity</span> <span class="lp-w">with</span> <span class="lp-w">top</span> <span class="lp-w">and</span> <span class="lp-w">a</span> <span class="lp-w">new</span> <span class="lp-w">faucet,</span> <span class="lp-w">patch</span> <span class="lp-w">and</span> <span class="lp-w">paint</span> <span class="lp-w">the</span> <span class="lp-w">wall.”</span></p>
+    <dl class="jc-total">
+      <dt>Remove old vanity and top</dt><dd>$180.00</dd>
+      <dt>36&nbsp;in. vanity with quartz top</dt><dd>$640.00</dd>
+      <dt>Faucet, brushed nickel</dt><dd>$145.00</dd>
+      <dt>Install vanity, top and faucet</dt><dd>$320.00</dd>
+      <dt>Patch and paint wall</dt><dd>$210.00</dd>
+      <dt>Tax 7.25% on materials</dt><dd>$56.91</dd>
+      <dt class="jc-total__sum">Total</dt><dd class="jc-total__sum">$1,551.91</dd>
+    </dl>
+  </div>
+</section>
+
+<section id="faq" class="wrap sec split" aria-labelledby="h-faq">
+  <article class="jc-card price-card" aria-labelledby="h-price" data-reveal="up">
+    <h2 id="h-price" class="price-card__name">One plan</h2>
+    <p class="price"><span>$24</span><span class="price__unit"> a month</span></p>
+    <p class="price-card__note">Or $240 a year. Estimates, change orders, signing, the job record and export are all included.</p>
+    <a class="jc-btn jc-btn--primary jc-btn--block jc-btn--big" href="#waitlist">Join the waitlist</a>
+    <p class="price-card__small">14 days free, no card, when it opens. <a href="/pricing/">Pricing details</a></p>
+  </article>
+  <div data-reveal="up">
+    <h2 id="h-faq" class="h2 h2--sm">Questions</h2>
+    <dl class="faq">
+      <div><dt>Can I use it today?</dt><dd>Not yet. We’re building it now. Join the waitlist and we’ll email you when the 14-day trial opens. The change-order and estimate <a href="/templates/">templates</a> are free today.</dd></div>
+      <div><dt>Does my customer need an app or an account?</dt><dd>No. They sign on your phone, or open the link you text them in their phone’s browser.</dd></div>
+      <div><dt>Will a signature hold up?</dt><dd>That depends on your contract and your state. We record who signed, when, on what device and a fingerprint of the exact document, so you have the details if you ever need them. Ask a lawyer about your situation.</dd></div>
+      <div><dt>Do I need a written change order in my state?</dt><dd>Some states require a written estimate, or written approval before extra work, for certain trades.
+        {%- if liveRules.length %} Our pages quote the rule word for word, with the date we last checked it:{% for rule in liveRules %} <a href="{{ rule.url }}">{{ rule.data.state }}</a>{% if not loop.last %},{% endif %}{% endfor %}.
+        {%- else %} We’re writing pages that quote the rule word for word, with the date we last checked it, starting with California and Virginia.
+        {%- endif %} General information, not legal advice.</dd></div>
+      <div><dt>What happens after the 14 days?</dt><dd>Subscribe for $24 a month or $240 a year. If you don’t, your account turns read-only and you can still download everything.</dd></div>
+    </dl>
+  </div>
+</section>
+
+{% include "waitlist.njk" %}

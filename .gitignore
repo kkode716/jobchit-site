@@ -1,0 +1,10 @@
+node_modules/
+_site/
+_site-sub/
+.features-gen/
+test-results/
+playwright-report/
+.lighthouseci/
+*.pdf
+.DS_Store
+review-shots/

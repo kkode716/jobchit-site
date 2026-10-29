@@ -1,0 +1,48 @@
+# Deploys to GitHub Pages. Manual trigger only, so nothing goes live without the founder (D19).
+# A publish build (PUBLISH=1) leaves out draft pages.
+name: Deploy to Pages
+on:
+  workflow_dispatch:
+    inputs:
+      site_url:
+        description: Site origin, no path (https://<user>.github.io, later https://jobchit.com)
+        required: true
+      path_prefix:
+        description: Path the site lives under (/jobchit-site/ on github.io, / on a custom domain)
+        required: true
+        default: /jobchit-site/
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      PUBLISH: '1'
+      SITE_URL: ${{ inputs.site_url }}
+      PATH_PREFIX: ${{ inputs.path_prefix }}
+      CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build
+      - name: Refuse to publish placeholders
+        run: |
+          if grep -rl '\[business email' _site; then echo "Set the CONTACT_EMAIL repository variable (TODO.md H5) before publishing."; exit 1; fi
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
