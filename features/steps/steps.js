@@ -1,11 +1,13 @@
 import { expect } from '@playwright/test';
 import { test as base, createBdd } from 'playwright-bdd';
 import { ORIGINS } from '../../tests/pages.js';
+import { stubTally } from '../../tests/tally.js';
 
 // ctx.page is the page every step acts on; "JavaScript is off" swaps it for a page in a no-JS context.
 export const test = base.extend({
   ctx: async ({ page }, use) => {
     const ctx = { page, contexts: [] };
+    await stubTally(page);
     await use(ctx);
     for (const c of ctx.contexts) await c.close();
   },
@@ -41,7 +43,22 @@ Then('I am at the waitlist section', async ({ ctx }) => {
   await expect(ctx.page).toHaveURL(/\/#waitlist$/);
   const section = ctx.page.locator('section#waitlist');
   await expect(section).toBeInViewport();
-  await expect(section.getByText('Waitlist form opens soon')).toBeVisible();
+  await expect(section.getByTitle('Join the Jobchit waitlist')).toBeVisible();
+});
+
+Given('Tally is blocked', async ({ ctx }) => {
+  await ctx.page.unroute('https://tally.so/**');
+  await ctx.page.route('https://tally.so/**', (route) => route.abort());
+});
+
+Then('the waitlist form loads from Tally', async ({ ctx }) => {
+  const form = ctx.page.locator('section#waitlist').getByTitle('Join the Jobchit waitlist');
+  await expect(form).toHaveAttribute('src', /^https:\/\/tally\.so\/embed\/Nqr5NB\?.*dynamicHeight=1/);
+  await expect(ctx.page.frameLocator('section#waitlist iframe').getByRole('heading', { name: 'Stub form' })).toBeVisible();
+});
+
+Then('I can open the form on Tally', async ({ ctx }) => {
+  await expect(ctx.page.locator('section#waitlist').getByRole('link', { name: 'Open it on Tally' })).toHaveAttribute('href', 'https://tally.so/r/Nqr5NB');
 });
 
 // Templates

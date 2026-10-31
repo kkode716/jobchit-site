@@ -183,9 +183,10 @@ a.jc-btn--primary, .jc-btn--primary { background: var(--accent); color: var(--on
 
 .final { margin: 128px 0 0; padding: 72px 24px; background: var(--final); text-align: center; scroll-margin-top: 24px; }
 .final .wrap { padding: 0; }
-.slot { max-width: 560px; margin: 32px auto 0; padding: 28px 24px; border: 1px dashed var(--edge); border-radius: var(--radius-lg); background: var(--paper); }
-.slot__title { margin: 0; font: 700 20px/28px var(--font-sans); }
-.slot__text { margin: 8px 0 20px; color: var(--ink-2); }
+/* Tally draws the form on white in both themes, so the card stays white too. */
+.form-card { max-width: 560px; margin: 32px auto 0; padding: 16px 20px; border-radius: var(--radius-lg); background: #fff; color-scheme: light; }
+.form-card iframe { display: block; border: 0; }
+.form-alt { margin: 16px 0 0; font-size: 16px; color: var(--ink-2); }
 
 .foot { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; padding-block: 40px; font-size: 16px; color: var(--ink-3); }
 .foot a { color: var(--ink-2); text-decoration: none; }

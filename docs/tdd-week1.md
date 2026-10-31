@@ -34,7 +34,7 @@ Fixes the tests forced: a duplicate landmark name on template pages (axe `landma
 
 | # | Guarantee | Test | Type |
 |---|---|---|---|
-| 1 | "Join the waitlist" in the hero and on the pricing plan card lands on `#waitlist`, which shows "Waitlist form opens soon" | `features/waitlist.feature` | BDD |
+| 1 | "Join the waitlist" in the hero and on the pricing plan card lands on `#waitlist`, which loads the Tally form (stubbed in tests); if Tally is blocked or JavaScript is off, a link opens the form on Tally | `features/waitlist.feature` | BDD |
 | 2 | The templates page lists all three; each template page has an h1, Print (calls `window.print`), Download PDF returning `application/pdf`, and no form, email field or sign-in text | `features/templates.feature` | BDD |
 | 3 | Every template PDF fits one US Letter page | `scripts/pdf.mjs` guard, run by `npm run build` | build check |
 | 4 | The California page quotes §7159(c)(5) word for word, every blockquote cites leginfo, it links the source, shows "Verified on" with an ISO date, and ends with the exact R3 footer | `features/requirement-page.feature`, `test/unit/requirement-page.test.mjs` | BDD, unit |
@@ -50,6 +50,5 @@ Fixes the tests forced: a duplicate landmark name on template pages (axe `landma
 
 ## Known gaps
 
-- CI has not run on GitHub: the repo doesn't exist yet. Every step in `ci.yml` was run locally instead (gitleaks in `dir` mode, since there are no commits yet; CI uses `git` mode over full history).
 - The mockup comparison is a visual review of screenshots, not a pixel diff, as the plan says.
-- The Tally embed isn't tested: it doesn't exist yet (H8).
+- Tests and axe use a stub in place of Tally, so the form's own markup isn't covered. The real embed was checked by hand at 375 and 1440, light and dark, and axe found 0 WCAG violations in it on 2026-10-30.

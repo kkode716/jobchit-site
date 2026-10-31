@@ -34,6 +34,6 @@ gitleaks runs in Docker with the pinned image in `.github/workflows/ci.yml`.
 
 - Requirement pages quote the statute word for word from the official source, show the date it was verified, and end with the fixed footer. They start as `draft: true` and go live only after the founder approves them.
 - Never write "legally binding", "compliant", "guaranteed", "meets California law", or anything about e-signature validity. `test/unit/banned.test.mjs` fails the build on these.
-- The waitlist slot on the home page (`src/_includes/waitlist.njk`) is where the Tally embed goes.
+- The waitlist form is a Tally embed (`src/_includes/waitlist.njk`); edit its questions in Tally. Tests stub Tally (`tests/tally.js`), so they don't need its servers.
 
 Deploys run only by hand, from `.github/workflows/pages.yml`.

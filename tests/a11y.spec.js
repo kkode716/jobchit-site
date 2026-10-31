@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { PAGES } from './pages.js';
+import { stubTally } from './tally.js';
 
 const TAGS = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'];
 
@@ -9,6 +10,7 @@ for (const path of PAGES) {
     for (const width of [375, 1440]) {
       test(`axe: ${path} ${colorScheme} ${width}`, async ({ browser, baseURL }) => {
         const context = await browser.newContext({ baseURL, colorScheme, viewport: { width, height: 900 } });
+        await stubTally(context);
         const page = await context.newPage();
         await page.goto(path);
         // Reveal every section and let the demos finish, so axe checks the page as a reader sees it.
