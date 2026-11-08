@@ -3,25 +3,35 @@ import assert from 'node:assert/strict';
 import { read, builtHtml, isNoindex } from './helpers.mjs';
 
 const FOOTER = 'General information, not legal advice. Check with your state licensing board or a lawyer.';
-const PAGE = 'state-rules/california/index.html';
+const PAGES = {
+  'state-rules/california/index.html': /^https:\/\/leginfo\.legislature\.ca\.gov\/faces\/codes_displaySection\.xhtml\?lawCode=BPC&amp;sectionNum=7159(\.10)?$/,
+  'state-rules/virginia/index.html': /^https:\/\/law\.lis\.virginia\.gov\/(admincode\/title18\/agency50\/chapter22\/section260|vacode\/title54\.1\/chapter11\/section54\.1-1100)\/$/,
+};
 
-test('the California page footer matches the fixed text exactly', () => {
-  const match = read(PAGE).match(/<p class="rule-footer">([\s\S]*?)<\/p>/);
-  assert.ok(match, 'no .rule-footer paragraph');
-  assert.equal(match[1], FOOTER);
-});
+for (const [page, official] of Object.entries(PAGES)) {
+  test(`${page}: the footer matches the fixed text exactly`, () => {
+    const match = read(page).match(/<p class="rule-footer">([\s\S]*?)<\/p>/);
+    assert.ok(match, 'no .rule-footer paragraph');
+    assert.equal(match[1], FOOTER);
+  });
 
-test('every statute quote cites the official leginfo page', () => {
-  const quotes = [...read(PAGE).matchAll(/<blockquote([^>]*)>/g)];
-  assert.ok(quotes.length >= 1, 'no blockquote');
-  for (const [, attrs] of quotes) assert.match(attrs, /cite="https:\/\/leginfo\.legislature\.ca\.gov\/faces\/codes_displaySection\.xhtml\?lawCode=BPC&amp;sectionNum=7159(\.10)?"/);
-});
+  test(`${page}: every quote cites the official source`, () => {
+    const cites = [...read(page).matchAll(/<blockquote[^>]*\bcite="([^"]*)"/g)].map((m) => m[1]);
+    assert.ok(cites.length >= 1, 'no cited blockquote');
+    for (const cite of cites) assert.match(cite, official);
+  });
 
-test('a draft requirement page carries noindex and no other page links to it', () => {
-  const html = read(PAGE);
-  if (!isNoindex(html)) return; // approved and live: nothing to hide
-  for (const { path, html: other } of builtHtml()) {
-    if (path === PAGE) continue;
-    assert.doesNotMatch(other, /href="[^"]*state-rules\/california\/"/, `${path} links to the draft page`);
-  }
+  test(`${page}: a draft carries noindex and no other page links to it`, () => {
+    const html = read(page);
+    if (!isNoindex(html)) return; // approved and live: nothing to hide
+    const slug = page.replace(/index\.html$/, '');
+    for (const { path, html: other } of builtHtml()) {
+      if (path === page) continue;
+      assert.doesNotMatch(other, new RegExp(`href="[^"]*${slug}"`), `${path} links to the draft page`);
+    }
+  });
+}
+
+test('the Virginia page stays a draft until the founder approves it (D19, R3)', () => {
+  assert.ok(isNoindex(read('state-rules/virginia/index.html')), 'the Virginia page lost its draft noindex before approval');
 });

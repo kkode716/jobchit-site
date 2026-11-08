@@ -1,0 +1,40 @@
+---
+layout: base.njk
+draft: true
+state: Virginia
+permalink: /state-rules/virginia/
+title: Virginia change order rules, quoted from the regulation | Jobchit
+description: What Virginia's Board for Contractors regulation 18VAC50-22-260 says about written contracts and written, signed change orders, quoted word for word.
+heading: "Virginia: change orders in writing, signed by both sides"
+sub: What the Board for Contractors regulation says about written contracts and signed change orders, and who it covers.
+---
+<div class="wrap sec sec--tight rule">
+  <article class="rule__body" aria-labelledby="h-plain">
+    <p class="rule__verified">Verified on <time datetime="{{ virginia.verified }}">{{ virginia.verifiedText }}</time> against the official text on law.lis.virginia.gov.</p>
+
+    <h2 id="h-plain" class="h2 h2--sm">In plain words</h2>
+    <ul class="rule__summary">
+      <li>The Board for Contractors regulation, 18VAC50-22-260, lists acts it prohibits for licensed contractors. One of them is not getting written change orders, signed by both the customer and the contractor, to an existing contract.</li>
+      <li>For residential work, it says the contract is to be in writing and signed by both sides before work starts or any payment is taken. Subcontractors and routine maintenance or service contracts are left out of that part.</li>
+      <li>It says the contract must state that any change to the cost, materials, work or estimated completion date is to be in writing and signed by all parties.</li>
+      <li>It says the contractor keeps a copy of the contract and every change order for five years.</li>
+      <li>Section 54.1-1100 of the Code of Virginia sets the license classes. Class C starts at a single contract or project over $1,000. Classes B and A cover bigger jobs.</li>
+      <li>Both sections say more than the parts quoted here. Read the full text at the links below.</li>
+    </ul>
+
+    {%- for section in virginia.sections %}
+    <section class="rule__section" aria-labelledby="h-{{ section.id }}">
+      <h2 id="h-{{ section.id }}" class="h2 h2--sm">{{ section.title }}</h2>
+      {%- for quote in section.quotes %}
+      <figure class="rule__quote">
+        <blockquote cite="{{ section.url }}"><p>{{ quote.text }}</p></blockquote>
+        <figcaption>{{ section.name }}, {{ quote.cite }}</figcaption>
+      </figure>
+      {%- endfor %}
+      <p class="rule__source">Source: <a href="{{ section.url }}">{{ section.linkText }}</a>. {{ section.history }}</p>
+    </section>
+    {%- endfor %}
+
+    <p class="rule-footer">General information, not legal advice. Check with your state licensing board or a lawyer.</p>
+  </article>
+</div>

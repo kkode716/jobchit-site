@@ -63,8 +63,10 @@ Then('I can open the form on Tally', async ({ ctx }) => {
 
 // Templates
 
-Then('I see links to {string}, {string} and {string}', async ({ ctx }, a, b, c) => {
-  for (const name of [a, b, c]) await expect(ctx.page.getByRole('main').getByRole('link', { name, exact: true })).toBeVisible();
+Then('I see a link to each of these templates:', async ({ ctx }, table) => {
+  const names = table.raw().map(([name]) => name);
+  for (const name of names) await expect(ctx.page.getByRole('main').getByRole('link', { name, exact: true })).toBeVisible();
+  await expect(ctx.page.getByRole('main').locator('.tpl-card__title a')).toHaveCount(names.length);
 });
 
 Then('I see the heading {string}', async ({ ctx }, name) => {
@@ -120,6 +122,16 @@ Then('every quote cites the official source on leginfo.legislature.ca.gov', asyn
 
 Then('I see a link to the official source', async ({ ctx }) => {
   await expect(ctx.page.locator('main a[href^="https://leginfo.legislature.ca.gov/"]').first()).toBeVisible();
+});
+
+Then('every quote cites an official page on {string}', async ({ ctx }, host) => {
+  const cites = await ctx.page.locator('blockquote').evaluateAll((els) => els.map((el) => el.cite));
+  expect(cites.length).toBeGreaterThan(0);
+  for (const cite of cites) expect(new URL(cite).origin).toBe(`https://${host}`);
+});
+
+Then('I see a link to the official source on {string}', async ({ ctx }, host) => {
+  await expect(ctx.page.locator(`main a[href^="https://${host}/"]`).first()).toBeVisible();
 });
 
 Then('I see the date it was last verified', async ({ ctx }) => {

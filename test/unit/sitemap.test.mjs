@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { read, builtHtml, isNoindex, SITE_SUB } from './helpers.mjs';
 
 const locs = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-const PUBLIC = ['/', '/pricing/', '/templates/', '/templates/change-order-remodelers/', '/templates/change-order-handymen/', '/templates/estimate/', '/state-rules/california/', '/privacy/'];
+const PUBLIC = ['/', '/pricing/', '/templates/', '/templates/change-order-remodelers/', '/templates/change-order-handymen/', '/templates/estimate/', '/templates/change-order-painters/', '/templates/estimate-painters/', '/templates/change-order-flooring/', '/templates/estimate-flooring/', '/templates/change-order-decks/', '/templates/estimate-decks/', '/templates/change-order-bathrooms/', '/templates/estimate-bathrooms/', '/templates/change-order-kitchens/', '/templates/estimate-kitchens/', '/state-rules/california/', '/privacy/'];
 
 test('the sitemap lists every public page and nothing marked noindex', () => {
   const urls = locs(read('sitemap.xml')).map((u) => new URL(u).pathname);
