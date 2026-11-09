@@ -12,6 +12,9 @@
 {%- if not noindex %}
 <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
 {%- endif %}
+{%- if page.url == "/" %}
+<meta name="google-site-verification" content="gQ9wdC0cLuiTcsNNDOZcYEvO8kqXFWDH4hyWjFSv-hk">
+{%- endif %}
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f9fafb" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)">

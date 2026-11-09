@@ -9,9 +9,7 @@ module.exports = (preset) => ({
     collect: { staticDistDir: './_site', maxAutodiscoverUrls: 0, numberOfRuns: 1, settings: preset === 'desktop' ? { preset: 'desktop' } : {} },
     assert: {
       assertMatrix: [
-        { matchingUrlPattern: '^(?!.*(404|state-rules\/virginia)).*$', assertions: all },
-        // Draft until the founder approves it (D19); drop this row and the exclusion above when it goes live.
-        { matchingUrlPattern: 'state-rules/virginia', assertions: { ...noindexed, 'document-title': 'error', 'meta-description': 'error', 'link-text': 'error', 'crawlable-anchors': 'error' } },
+        { matchingUrlPattern: '^(?!.*404).*$', assertions: all },
         { matchingUrlPattern: '404', assertions: { ...noindexed, 'document-title': 'error', 'meta-description': 'error', 'link-text': 'error', 'crawlable-anchors': 'error', 'http-status-code': 'off' } },
       ],
     },

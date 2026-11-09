@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { read, builtHtml, isNoindex, SITE_SUB } from './helpers.mjs';
 
 const locs = (xml) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-const PUBLIC = ['/', '/pricing/', '/templates/', '/templates/change-order-remodelers/', '/templates/change-order-handymen/', '/templates/estimate/', '/templates/change-order-painters/', '/templates/estimate-painters/', '/templates/change-order-flooring/', '/templates/estimate-flooring/', '/templates/change-order-decks/', '/templates/estimate-decks/', '/templates/change-order-bathrooms/', '/templates/estimate-bathrooms/', '/templates/change-order-kitchens/', '/templates/estimate-kitchens/', '/state-rules/california/', '/privacy/'];
+const PUBLIC = ['/', '/pricing/', '/templates/', '/templates/change-order-remodelers/', '/templates/change-order-handymen/', '/templates/estimate/', '/templates/change-order-painters/', '/templates/estimate-painters/', '/templates/change-order-flooring/', '/templates/estimate-flooring/', '/templates/change-order-decks/', '/templates/estimate-decks/', '/templates/change-order-bathrooms/', '/templates/estimate-bathrooms/', '/templates/change-order-kitchens/', '/templates/estimate-kitchens/', '/state-rules/california/', '/state-rules/virginia/', '/privacy/'];
 
 test('the sitemap lists every public page and nothing marked noindex', () => {
   const urls = locs(read('sitemap.xml')).map((u) => new URL(u).pathname);
@@ -22,4 +22,10 @@ test('the subpath build puts the prefix on sitemap, canonical and robots URLs', 
 
 test('the 404 page is noindex', () => {
   assert.ok(isNoindex(read('404.html')));
+});
+
+test('the home page carries the Search Console verification tag, and only the home page (K3)', () => {
+  const tag = '<meta name="google-site-verification" content="gQ9wdC0cLuiTcsNNDOZcYEvO8kqXFWDH4hyWjFSv-hk">';
+  assert.ok(read('index.html').includes(tag), 'home page is missing the verification tag');
+  for (const { path, html } of builtHtml()) if (path !== 'index.html') assert.ok(!html.includes('google-site-verification'), `${path} has the verification tag`);
 });

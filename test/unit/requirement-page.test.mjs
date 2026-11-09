@@ -32,6 +32,7 @@ for (const [page, official] of Object.entries(PAGES)) {
   });
 }
 
-test('the Virginia page stays a draft until the founder approves it (D19, R3)', () => {
-  assert.ok(isNoindex(read('state-rules/virginia/index.html')), 'the Virginia page lost its draft noindex before approval');
+test('the Virginia page is live after the founder approved it (K1, 2026-11-08)', () => {
+  assert.ok(!isNoindex(read('state-rules/virginia/index.html')), 'the Virginia page still carries the draft noindex');
+  assert.match(read('index.html'), /<a href="\/state-rules\/virginia\/">Virginia<\/a>/, 'the home FAQ does not link the Virginia page');
 });
