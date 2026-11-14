@@ -1,3 +1,8 @@
+import { execFileSync, spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { mkdtempSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { expect } from '@playwright/test';
 import { test as base, createBdd } from 'playwright-bdd';
 import { ORIGINS } from '../../tests/pages.js';
@@ -6,6 +11,11 @@ import templates from '../../src/_data/templates.js';
 
 // ctx.page is the page every step acts on; "JavaScript is off" swaps it for a page in a no-JS context.
 export const test = base.extend({
+  preview: async ({}, use) => {
+    const directory = mkdtempSync(join(tmpdir(), 'jobchit-preview-bdd-'));
+    try { await use({ directory }); }
+    finally { rmSync(directory, { recursive: true, force: true }); }
+  },
   ctx: async ({ page }, use) => {
     const ctx = { page, contexts: [] };
     await stubTally(page);
@@ -271,4 +281,46 @@ Then('every one answers 200 and stays under {string}', async ({ ctx }, prefix) =
 Then('every in-page anchor it points to exists', async ({ ctx }) => {
   const missing = ctx.anchors.filter(({ page, id }) => !ctx.html.get(page)?.includes(`id="${id}"`)).map((a) => `#${a.id} on ${a.page} (from ${a.from})`);
   expect(missing).toEqual([]);
+});
+
+// Maintainer CI preview: exercise the actual event-file CLI and its retained proof lifecycle.
+Given('I have a clean checkout and an exact uncommitted README change', async ({ preview }) => {
+  preview.cwd = join(preview.directory, 'repo');
+  execFileSync('git', ['clone', '--quiet', '--no-hardlinks', process.cwd(), preview.cwd]);
+  preview.git = (...args) => execFileSync('git', ['-C', preview.cwd, ...args], { encoding: 'utf8' }).trim();
+  preview.base = preview.git('rev-parse', 'HEAD');
+  const original = readFileSync(join(preview.cwd, 'README.md'), 'utf8');
+  preview.expected = original + '\nCI preview maintainer acceptance fixture.\n';
+  writeFileSync(join(preview.cwd, 'README.md'), preview.expected);
+  const patch = execFileSync('git', ['-C', preview.cwd, 'diff', '--binary', 'HEAD']);
+  preview.git('add', '--', 'README.md');
+  preview.tree = preview.git('write-tree');
+  preview.git('restore', '--staged', '--worktree', '--', 'README.md');
+  preview.digest = createHash('sha256').update(patch).digest('hex');
+  preview.event = join(preview.directory, 'event.json');
+  preview.proof = join(preview.directory, 'proof.json');
+  writeFileSync(preview.event, JSON.stringify({ inputs: { base_sha: preview.base, patch_sha256: preview.digest, patch_base64: patch.toString('base64') } }));
+  preview.cli = (...args) => spawnSync(process.execPath, [join(process.cwd(), 'scripts/apply-ci-preview.mjs'), ...args], {
+    cwd: preview.cwd, encoding: 'utf8', env: { ...process.env, GITHUB_EVENT_PATH: preview.event, JOBCHIT_PREVIEW_EVIDENCE: preview.proof },
+  });
+});
+When('I submit that change through the CI preview event interface', async ({ preview }) => {
+  const result = preview.cli();
+  expect(result.status, result.stderr).toBe(0);
+});
+Then('the preview stages exactly that change without creating a commit', async ({ preview }) => {
+  expect(preview.git('rev-parse', 'HEAD')).toBe(preview.base);
+  expect(preview.git('write-tree')).toBe(preview.tree);
+  expect(preview.git('diff', '--cached', '--name-only')).toBe('README.md');
+  expect(readFileSync(join(preview.cwd, 'README.md'), 'utf8')).toBe(preview.expected);
+});
+When('I retain the checked preview identity through the CI preview interface', async ({ preview }) => {
+  preview.git('diff', '--cached', '--check');
+  const result = preview.cli('--verify');
+  expect(result.status, result.stderr).toBe(0);
+});
+Then('the proof binds the original commit and exact patch and checked source tree', async ({ preview }) => {
+  const proof = JSON.parse(readFileSync(preview.proof, 'utf8'));
+  expect(proof).toMatchObject({ mode: 'uncommitted_preview', base_sha: preview.base, patch_sha256: preview.digest, tree_sha: preview.tree, changed_paths: ['README.md'], source_tree_unchanged_after_checks: true });
+  expect(preview.git('rev-parse', 'HEAD')).toBe(preview.base);
 });

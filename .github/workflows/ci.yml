@@ -2,6 +2,19 @@
 name: CI
 on:
   workflow_dispatch:
+    inputs:
+      base_sha:
+        description: Exact checked-out base commit for an uncommitted preview
+        type: string
+        required: false
+      patch_base64:
+        description: Canonical base64 text patch, at most 48000 decoded bytes
+        type: string
+        required: false
+      patch_sha256:
+        description: SHA256 of the decoded text patch
+        type: string
+        required: false
   push:
   pull_request:
 permissions:
@@ -19,6 +32,14 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - name: Apply exact uncommitted preview (no commit)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.patch_base64 != '' }}
+        env:
+          JOBCHIT_PREVIEW_EVIDENCE: ${{ runner.temp }}/jobchit-ci-preview.json
+        run: node scripts/apply-ci-preview.mjs
+      - name: gitleaks (uncommitted preview)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.patch_base64 != '' }}
+        run: git diff --cached --binary | docker run --rm -i -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f stdin --config /repo/.gitleaks.toml --redact --no-banner
       - run: npm ci
       - run: npx playwright install --with-deps chromium
       - name: Build (root and /jobchit-site/)
@@ -35,6 +56,13 @@ jobs:
         run: npm run test:e2e
       - name: Lighthouse CI
         run: npm run lhci
+      - name: Retain uncommitted preview identity
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.patch_base64 != '' }}
+        env:
+          JOBCHIT_PREVIEW_EVIDENCE: ${{ runner.temp }}/jobchit-ci-preview.json
+        run: |
+          node scripts/apply-ci-preview.mjs --verify
+          cp "$JOBCHIT_PREVIEW_EVIDENCE" _site/jobchit-ci-preview.json
       - name: Retain built PDFs and site (no deployment)
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
