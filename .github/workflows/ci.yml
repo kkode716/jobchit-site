@@ -1,6 +1,7 @@
 # Runs on GitHub-hosted runners for every push and pull request. Nothing here deploys.
 name: CI
 on:
+  workflow_dispatch:
   push:
   pull_request:
 permissions:
@@ -34,3 +35,8 @@ jobs:
         run: npm run test:e2e
       - name: Lighthouse CI
         run: npm run lhci
+      - name: Retain built PDFs and site (no deployment)
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          name: jobchit-ci-output
+          path: _site
