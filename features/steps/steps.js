@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { test as base, createBdd } from 'playwright-bdd';
 import { ORIGINS } from '../../tests/pages.js';
 import { stubTally } from '../../tests/tally.js';
+import templates from '../../src/_data/templates.js';
 
 // ctx.page is the page every step acts on; "JavaScript is off" swaps it for a page in a no-JS context.
 export const test = base.extend({
@@ -62,6 +63,25 @@ Then('I can open the form on Tally', async ({ ctx }) => {
 });
 
 // Templates
+
+Then('the template search listings use forms and keep their headings', async ({ request }) => {
+  for (const [prefix, origin] of Object.entries(ORIGINS)) {
+    for (const { slug, name } of templates) {
+      const response = await request.get(`${origin}${prefix}templates/${slug}/`);
+      expect(response.status()).toBe(200);
+      const html = await response.text();
+      expect(html, `${prefix}${slug} title`).toMatch(/<title>(?:Change order|Estimate) form\b/);
+      expect(html, `${prefix}${slug} description`).toMatch(/<meta name="description" content="[^"<>]*\bform\b/);
+      expect(html, `${prefix}${slug} heading`).toContain(`<h1 id="h1" class="h1">${name}</h1>`);
+    }
+    const directory = await request.get(`${origin}${prefix}templates/`);
+    expect(directory.status()).toBe(200);
+    const html = await directory.text();
+    expect(html).toContain('<title>Free change-order and estimate forms | Jobchit</title>');
+    expect(html).toContain('<meta name="description" content="Printable change-order and estimate forms ');
+    expect(html).toContain('<h1 id="h1" class="h1">Free change-order and estimate templates</h1>');
+  }
+});
 
 Then('I see a link to each of these templates:', async ({ ctx }, table) => {
   const names = table.raw().map(([name]) => name);

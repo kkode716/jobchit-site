@@ -1,6 +1,9 @@
 Feature: Free templates
   A contractor can print a change-order or estimate template without an account or an email.
 
+  Scenario: Search listings call the templates forms and keep the page headings
+    Then the template search listings use forms and keep their headings
+
   Scenario: The templates page lists all thirteen
     Given I open "/templates/"
     Then I see a link to each of these templates:

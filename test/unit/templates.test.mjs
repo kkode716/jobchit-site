@@ -31,3 +31,20 @@ test('every template PDF is one US Letter page', () => {
     assert.match(pdf, /\/MediaBox \[0 0 612 792\]/, `${slug}.pdf is not US Letter`);
   }
 });
+
+
+test('template search copy says form while page headings stay unchanged', () => {
+  for (const { slug, name } of templates) {
+    const html = read(`templates/${slug}/index.html`);
+    assert.match(html, /<title>(?:Change order|Estimate) form\b/, `${slug} title needs form`);
+    assert.match(html, /<meta name="description" content="[^"<>]*\bform\b/, `${slug} description needs form`);
+    assert.ok(html.includes(`<h1 id="h1" class="h1">${name}</h1>`), `${slug} heading changed`);
+  }
+});
+
+test('the template directory search copy says forms without changing its heading', () => {
+  const html = read('templates/index.html');
+  assert.match(html, /<title>Free change-order and estimate forms \| Jobchit<\/title>/);
+  assert.match(html, /<meta name="description" content="Printable change-order and estimate forms /);
+  assert.ok(html.includes('<h1 id="h1" class="h1">Free change-order and estimate templates</h1>'));
+});
