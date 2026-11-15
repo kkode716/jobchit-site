@@ -4,7 +4,7 @@ Feature: Free templates
   Scenario: Search listings call the templates forms and keep the page headings
     Then the template search listings use forms and keep their headings
 
-  Scenario: The templates page lists all thirteen
+  Scenario: The templates page lists every template
     Given I open "/templates/"
     Then I see a link to each of these templates:
       | Change order for remodelers |
@@ -20,6 +20,7 @@ Feature: Free templates
       | Estimate for bathrooms      |
       | Change order for kitchens   |
       | Estimate for kitchens       |
+      | Change order for roofing    |
 
   Scenario Outline: Open and print <name> without signing in
     Given I open "<path>"
@@ -46,3 +47,4 @@ Feature: Free templates
       | the bathroom estimate             | /templates/estimate-bathrooms/       | Estimate for bathrooms       |
       | the kitchen change order          | /templates/change-order-kitchens/    | Change order for kitchens    |
       | the kitchen estimate              | /templates/estimate-kitchens/        | Estimate for kitchens        |
+      | the roofing change order          | /templates/change-order-roofing/     | Change order for roofing     |

@@ -6,7 +6,7 @@ import templates from '../../src/_data/templates.js';
 import { read, SITE } from './helpers.mjs';
 
 const TRADES = ['painters', 'flooring', 'decks', 'bathrooms', 'kitchens'];
-const SLUGS = ['change-order-remodelers', 'change-order-handymen', 'estimate', ...TRADES.flatMap((t) => [`change-order-${t}`, `estimate-${t}`])];
+const SLUGS = ['change-order-remodelers', 'change-order-handymen', 'estimate', ...TRADES.flatMap((t) => [`change-order-${t}`, `estimate-${t}`]), 'change-order-roofing'];
 
 test('the template list has a change order and an estimate for each trade', () => {
   assert.deepEqual(templates.map((t) => t.slug).sort(), [...SLUGS].sort());

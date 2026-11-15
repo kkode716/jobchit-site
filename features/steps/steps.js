@@ -324,3 +324,10 @@ Then('the proof binds the original commit and exact patch and checked source tre
   expect(proof).toMatchObject({ mode: 'uncommitted_preview', base_sha: preview.base, patch_sha256: preview.digest, tree_sha: preview.tree, changed_paths: ['README.md'], source_tree_unchanged_after_checks: true });
   expect(preview.git('rev-parse', 'HEAD')).toBe(preview.base);
 });
+
+Then('the ordinary daily template {string} exists in both builds', async ({ request }, slug) => {
+  for (const [prefix, origin] of Object.entries(ORIGINS)) {
+    const response = await request.get(`${origin}${prefix}templates/${slug}/`);
+    expect(response.status()).toBe(200);
+  }
+});

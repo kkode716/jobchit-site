@@ -65,4 +65,9 @@ export default [
     name: 'Estimate for kitchens',
     summary: 'Cabinets, countertops, appliances, allowances and lead times, line items and total, with a line to sign.',
   },
+  {
+    slug: 'change-order-roofing',
+    name: 'Change order for roofing',
+    summary: 'For damaged decking or a material change: tear-off layers, flashing, ventilation, the price change and both signatures.',
+  },
 ];
