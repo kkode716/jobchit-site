@@ -17,6 +17,7 @@ export const PAGES = [
   '/templates/change-order-kitchens/',
   '/templates/estimate-kitchens/',
   '/templates/change-order-roofing/',
+  '/templates/estimate-roofing/',
   '/state-rules/california/',
   '/state-rules/virginia/',
   '/privacy/',
