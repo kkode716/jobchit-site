@@ -70,4 +70,9 @@ export default [
     name: 'Change order for roofing',
     summary: 'For damaged decking or a material change: tear-off layers, flashing, ventilation, the price change and both signatures.',
   },
+  {
+    slug: 'estimate-roofing',
+    name: 'Estimate for roofing',
+    summary: 'Roof area and pitch, tear-off, roofing product, flashing, ventilation, decking allowance, line items and total, with a line to sign.',
+  },
 ];
