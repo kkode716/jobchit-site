@@ -22,6 +22,7 @@ Feature: Free templates
       | Estimate for kitchens       |
       | Change order for roofing    |
       | Estimate for roofing        |
+      | Change order for electricians |
 
   Scenario Outline: Open and print <name> without signing in
     Given I open "<path>"
@@ -50,3 +51,4 @@ Feature: Free templates
       | the kitchen estimate              | /templates/estimate-kitchens/        | Estimate for kitchens        |
       | the roofing change order          | /templates/change-order-roofing/     | Change order for roofing     |
       | the roofing estimate              | /templates/estimate-roofing/         | Estimate for roofing         |
+      | the electrician change order      | /templates/change-order-electricians/ | Change order for electricians |

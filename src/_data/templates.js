@@ -75,4 +75,9 @@ export default [
     name: 'Estimate for roofing',
     summary: 'Roof area and pitch, tear-off, roofing product, flashing, ventilation, decking allowance, line items and total, with a line to sign.',
   },
+  {
+    slug: 'change-order-electricians',
+    name: 'Change order for electricians',
+    summary: 'For added circuits, panel or service changes and fixture swaps: location, wire and breaker size, permit or inspection, the price change and both signatures.',
+  },
 ];
