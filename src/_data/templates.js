@@ -80,4 +80,9 @@ export default [
     name: 'Change order for electricians',
     summary: 'For added circuits, panel or service changes and fixture swaps: location, wire and breaker size, permit or inspection, the price change and both signatures.',
   },
+  {
+    slug: 'estimate-electricians',
+    name: 'Estimate for electricians',
+    summary: 'Service and panel size, new circuits and breakers, wire, devices and fixtures, wall patching, permit, line items and total, with a line to sign.',
+  },
 ];
