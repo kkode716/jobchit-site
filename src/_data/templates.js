@@ -85,4 +85,9 @@ export default [
     name: 'Estimate for electricians',
     summary: 'Service and panel size, new circuits and breakers, wire, devices and fixtures, wall patching, permit, line items and total, with a line to sign.',
   },
+  {
+    slug: 'change-order-concrete',
+    name: 'Change order for concrete',
+    summary: 'For a bigger slab, a thicker pour or a new finish: size, thickness, yardage, mix, rebar or mesh, excavation, the price change and both signatures.',
+  },
 ];

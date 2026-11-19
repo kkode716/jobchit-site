@@ -24,6 +24,7 @@ Feature: Free templates
       | Estimate for roofing        |
       | Change order for electricians |
       | Estimate for electricians     |
+      | Change order for concrete     |
 
   Scenario Outline: Open and print <name> without signing in
     Given I open "<path>"
@@ -54,3 +55,4 @@ Feature: Free templates
       | the roofing estimate              | /templates/estimate-roofing/         | Estimate for roofing         |
       | the electrician change order      | /templates/change-order-electricians/ | Change order for electricians |
       | the electrician estimate          | /templates/estimate-electricians/     | Estimate for electricians     |
+      | the concrete change order         | /templates/change-order-concrete/     | Change order for concrete     |
