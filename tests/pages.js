@@ -19,6 +19,7 @@ export const PAGES = [
   '/templates/change-order-roofing/',
   '/templates/estimate-roofing/',
   '/templates/change-order-electricians/',
+  '/templates/estimate-electricians/',
   '/state-rules/california/',
   '/state-rules/virginia/',
   '/privacy/',
