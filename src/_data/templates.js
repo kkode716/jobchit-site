@@ -90,4 +90,9 @@ export default [
     name: 'Change order for concrete',
     summary: 'For a bigger slab, a thicker pour or a new finish: size, thickness, yardage, mix, rebar or mesh, excavation, the price change and both signatures.',
   },
+  {
+    slug: 'estimate-concrete',
+    name: 'Estimate for concrete',
+    summary: 'Area and thickness, yards, mix and PSI, rebar or mesh, base and excavation, finish, line items and total, with a line to sign.',
+  },
 ];
