@@ -41,7 +41,16 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.patch_base64 != '' }}
         run: git diff --cached --binary | docker run --rm -i -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f stdin --config /repo/.gitleaks.toml --redact --no-banner
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      # The runner fetches Chromium's system packages from the Ubuntu mirrors, which sometimes
+      # reset connections (2026-11-19 runs failed this way). Try up to three times before failing.
+      - name: Install Chromium and its system packages
+        run: |
+          for attempt in 1 2 3; do
+            npx playwright install --with-deps chromium && exit 0
+            echo "Install attempt $attempt failed; retrying in 30 seconds."
+            sleep 30
+          done
+          exit 1
       - name: Build (root and /jobchit-site/)
         run: |
           npm run build:site

@@ -36,7 +36,14 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
+      - name: Install Chromium and its system packages (up to three tries)
+        run: |
+          for attempt in 1 2 3; do
+            npx playwright install --with-deps chromium && exit 0
+            echo "Install attempt $attempt failed; retrying in 30 seconds."
+            sleep 30
+          done
+          exit 1
       - run: npm run build
       - name: Refuse to publish placeholders
         run: |
