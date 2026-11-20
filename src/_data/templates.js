@@ -95,4 +95,9 @@ export default [
     name: 'Estimate for concrete',
     summary: 'Area and thickness, yards, mix and PSI, rebar or mesh, base and excavation, finish, line items and total, with a line to sign.',
   },
+  {
+    slug: 'change-order-hvac',
+    name: 'Change order for HVAC',
+    summary: 'For a bigger or more efficient unit, extra duct runs or a new thermostat: equipment, size, efficiency, refrigerant, ducts, line set, the price change and both signatures.',
+  },
 ];
