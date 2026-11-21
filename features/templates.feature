@@ -27,6 +27,7 @@ Feature: Free templates
       | Change order for concrete     |
       | Estimate for concrete         |
       | Change order for HVAC         |
+      | Estimate for HVAC             |
 
   Scenario Outline: Open and print <name> without signing in
     Given I open "<path>"
@@ -60,3 +61,4 @@ Feature: Free templates
       | the concrete change order         | /templates/change-order-concrete/     | Change order for concrete     |
       | the concrete estimate             | /templates/estimate-concrete/         | Estimate for concrete         |
       | the HVAC change order             | /templates/change-order-hvac/         | Change order for HVAC         |
+      | the HVAC estimate                 | /templates/estimate-hvac/             | Estimate for HVAC             |
