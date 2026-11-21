@@ -100,4 +100,9 @@ export default [
     name: 'Change order for HVAC',
     summary: 'For a bigger or more efficient unit, extra duct runs or a new thermostat: equipment, size, efficiency, refrigerant, ducts, line set, the price change and both signatures.',
   },
+  {
+    slug: 'estimate-hvac',
+    name: 'Estimate for HVAC',
+    summary: 'System type, make and model, tons or BTU, SEER2 or AFUE, refrigerant, ducts, line set, thermostat and electrical, line items and total, with a line to sign.',
+  },
 ];
