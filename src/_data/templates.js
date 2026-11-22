@@ -105,4 +105,9 @@ export default [
     name: 'Estimate for HVAC',
     summary: 'System type, make and model, tons or BTU, SEER2 or AFUE, refrigerant, ducts, line set, thermostat and electrical, line items and total, with a line to sign.',
   },
+  {
+    slug: 'change-order-plumbers',
+    name: 'Change order for plumbers',
+    summary: 'For a fixture upgrade, a rerouted line or corroded pipe found mid-job: fixtures, pipe material and size, drains and vents, water heater, walls opened, the price change and both signatures.',
+  },
 ];

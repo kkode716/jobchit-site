@@ -24,6 +24,7 @@ export const PAGES = [
   '/templates/estimate-concrete/',
   '/templates/change-order-hvac/',
   '/templates/estimate-hvac/',
+  '/templates/change-order-plumbers/',
   '/state-rules/california/',
   '/state-rules/virginia/',
   '/privacy/',
