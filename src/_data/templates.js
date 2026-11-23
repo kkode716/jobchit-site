@@ -110,4 +110,9 @@ export default [
     name: 'Change order for plumbers',
     summary: 'For a fixture upgrade, a rerouted line or corroded pipe found mid-job: fixtures, pipe material and size, drains and vents, water heater, walls opened, the price change and both signatures.',
   },
+  {
+    slug: 'estimate-plumbers',
+    name: 'Estimate for plumbers',
+    summary: 'Fixtures, pipe material and size, drains and vents, water heater, sewer line, gas line and walls opened, line items and total, with a line to sign.',
+  },
 ];
