@@ -30,6 +30,7 @@ Feature: Free templates
       | Estimate for HVAC             |
       | Change order for plumbers     |
       | Estimate for plumbers         |
+      | Change order for fencing      |
 
   Scenario Outline: Open and print <name> without signing in
     Given I open "<path>"
@@ -66,3 +67,4 @@ Feature: Free templates
       | the HVAC estimate                 | /templates/estimate-hvac/             | Estimate for HVAC             |
       | the plumbing change order         | /templates/change-order-plumbers/     | Change order for plumbers     |
       | the plumbing estimate             | /templates/estimate-plumbers/         | Estimate for plumbers         |
+      | the fencing change order          | /templates/change-order-fencing/      | Change order for fencing      |
