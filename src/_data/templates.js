@@ -115,4 +115,9 @@ export default [
     name: 'Estimate for plumbers',
     summary: 'Fixtures, pipe material and size, drains and vents, water heater, sewer line, gas line and walls opened, line items and total, with a line to sign.',
   },
+  {
+    slug: 'change-order-fencing',
+    name: 'Change order for fencing',
+    summary: 'For a moved fence line, an extra gate or rock hit while digging: linear feet, material and height, posts and footings, gates, old fence removal, the price change and both signatures.',
+  },
 ];
